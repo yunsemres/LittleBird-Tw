@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Member/Views/Shared/denemeprofillayoutpage.cshtml";
+}
+
+@model List<LittleBird.Model.Option.Tweet>
+
+<script src="~/Content/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Content/js/jquery.dataTables.min.js"></script>
+<link href="~/Content/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+<section class="content-header">
+    <ol class="breadcrumb">
+        <li><a href="/Member/Home/show"><i class="fa fa-home"></i> Time line</a></li>
+        <li><a href="/Member/Tweet/Add">MyTweet Page</a></li>
+        <li class="active">Tweet List</li>
+    </ol>
+</section>
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">My Tweet Page</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                             
+                                <th>TweetContent</th>
+                                <th>Publish Date</th>
+                                
+                                <th>User Name</th>
+                                <td>Image</td>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                            
+                                    <td>@item.TweetContent</td>
+                                    <td>@item.PublishDate</td>
+                                    
+                                    <td>@item.AppUser.UserName</td>
+                                    <td>
+                                        <img src="@item.ImagePath" style="display:block" width="75" height="75" />
+                                    </td>
+                                    <td><a href="/Member/Tweet/Update/@item.ID" type="button" class="btn btn-block btn-warning">Update</a></td>
+                                    <td><a href="/Member/Tweet/Delete/@item.ID" type="button" class="btn btn-block btn-danger">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        })
+    })
+</script>
